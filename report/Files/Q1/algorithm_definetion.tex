@@ -1,0 +1,63 @@
+\textbf{\subsection{Algorithms To Solve Unconstrained Nonlinear Programming Problems}} 
+There are different algorithms that can solve general unconstrained nonlinear programming problems. These include:
+\begin{enumerate}
+    \item Steepest Descent search algorithm
+    \item Secant Algorithm
+    \item Conjugate gradient Method
+\end{enumerate}
+\subsubsection{Steepest Descent Algorithm}
+ Steepest Descent is a first-order iterative optimization algorithm to find a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient of the function at the current point, because this is the direction of steepest descent. Overview of the Steepest Descent Algorithm is provided below: 
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output\,}
+\SetAlgoLined
+\DontPrintSemicolon
+\begin{algorithm}[H]
+   \textbf{Choose $x_{0}$ \in \mathbb{R}^{n}. Set\hspace{2mm}i = 0}: \newline
+   \textbf{Iteration j: } \\
+   (1) : Stop \hspace{2mm} if \hspace{2mm} $\nabla V (x_{j})$ = 0 as then $x_{j}$ satisfies a necessary condition for a local minimizer. \\
+   (2) : Set $s_{j}$ := -$\nabla V(x_{j})$ \\
+   (3) : Choose a scalar $\omega_{j} > 0$, so $V(x_{j} + \omega_{j}s_{j})$ is less than $V(x_{j})$, typically $\omega_{j}$ is chosen to minimize $V(x_{j} + \omega s_{j})$ with $\omega \in \mathbb{R}$\\
+   (4) : Set j = j+1 and return to first step.\\
+  \caption{\textsc{Steepest Descent Algorithm}}
+\end{algorithm}
+\subsubsection{Secant Algorithm}
+The secant method is a root-finding algorithm that uses a succession of roots of secant lines to better approximate a root of a function f. The secant method is a finite-difference approximation of Newton's method. It is also known as a quasi-newton method. Overview of the Secant Algorithm is provided below: 
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output\,}
+\SetAlgoLined
+\DontPrintSemicolon
+\begin{algorithm}[H]
+   \textbf{Choose $x_{0}$ \in \mathbb{R}^{n}.}: \newline
+   \textbf{Symmetric positive definite $H_{0} \in \mathbb{R}^{n x n}$, $H_{0}$ is an estimate of unknown $C^{-1}$}\newline 
+   Set \hspace{2mm} j := 0 \\
+   \textbf{Iteration} \hspace{2mm} j: \\
+   (1) : Set \hspace{2mm} $s_{j}$ = -$H_{j}\nabla V(x_{j})$ (pseudo-Newton search direction). \\
+   (2) : Choose $\omega_{j} \geq$ 0 so $V(x_{j} + \omega_{j}s_{j})$ less than $V(x_{j})$ \\
+   (3) : Set $x_{j+1}$ = $x_{j} + \omega_{j}s_{j}$ \\
+   (4) : Stop if $||\nabla V(x_{j+1})||$ less than $\epsilon$ = small \\
+   (5) : $\triangle x_{j}$ = $x_{j+1} - x_{j}$, $\triangle g_{j}$ = $\nabla V(x_{j+1}) - \nabla V(x_{j})$ \\
+   (6) : Choose symmetric positive definite $H_{j+1} \in \mathbb{R}^{nxn}$ so \\
+   $H_{j+1} \cong C^{-1}$ - improved \\
+   (7) : Set $j = j+1$ and return to (1) \\
+  \caption{\textsc{Secant Algorithm}}
+\end{algorithm}
+The most famous way to choose $H_{j}$ is the David Fletcher Powell Algorithm. 
+
+\subsubsection{Conjugate Gradient Method}
+Conjugate direction methods can be regarded as being between the method of steepest descent (first-order method that uses gradient) and Newton’s method (second-order method that uses Hessian as well). It accelerates the convergence rate of steepest descent while avoiding the high computational cost of Newton’s method. Overview of the Conjugate Gradient Method is provided below:   
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output\,}
+\SetAlgoLined
+\DontPrintSemicolon
+\begin{algorithm}[H]
+   \textbf{Choose $x_{0}$ \in \mathbb{R}^{n}}: \newline
+   Set\hspace{2mm} $s_{0}$ = -$\nabla V(x_{0}), j = 0$ \newline 
+   (1) : Stop if $||V(x_{j})||$ is less than $\epsilon$ as then $x_{j} \cong x$ \\
+   (2) : Choose $\omega_{j} \in$ arg min $V(x_{j} + \omega s_{j})$ \\
+   $x_{j+1} = x_{j} + \omega_{j}s_{j}$\\
+   (3) : Set $\beta_{j+1} = \frac{[\nabla V(x_{j+1}) - \nabla V(x_{j})]^{T}\nabla V(x_{j+1})}{||\nabla V(x_{j})||^{2}} \in \mathbb{R}$\\
+   $s_{j+1} = \nabla V(x_{j+1}) + \beta_{j+1}s_{j}$\\
+   the term $\beta_{j+1}s_{j}$ makes the conjugate gradient different from the steepest descent. \\
+   $j = j + 1$ and return to (1) \\
+  \caption{\textsc{Conjugate Gradient Method}}
+\end{algorithm}

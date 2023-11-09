@@ -1,0 +1,109 @@
+
+\documentclass [12pt,letterpaper]{exam}
+\usepackage{amsmath, amsthm, amsfonts, amssymb, amscd}
+\usepackage{type1cm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithm2e}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\comment}[1]{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}{Definition}[section]
+\newcommand{\eop}{\hfill $\sqcap\!\!\!\!\sqcup$} % end of proof
+%
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+\def\proofbox{\blacksquare}
+\def\bydef{\stackrel{\Delta}{=}}
+\newcommand{\reals}{{\mathbb R}}
+\newcommand{\natnums}{{\mathbb N}}
+\newcommand{\naturals}{\mathds{N}}
+%\usepackage{graphicx}
+
+%\pagestyle{plain}
+
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\textwidth      6.0in
+\headheight     0.0in
+\topmargin      0.0in
+\textheight     9.0in
+
+\header{ECSE-507}{Optimization and Optimal Control}{18 March 2022}
+
+\newcounter{count}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\vspace*{5mm}
+\begin{center}
+{\LARGE\bf McGill University }\\[5mm]
+{\LARGE\bf Course ECSE-507 semester 2022 }\\[3mm]
+{\LARGE\bf Optimization and Optimal Control}\\[5mm]
+\end{center}
+
+\flushleft{
+\begin{tabbing}
+XXXXXXXXXXXXXXXXXXXXXXX\= XXXXXXXXXXXXXXXXXXXXXXXX\= \kill
+ {\bf Instructor} \\[1mm]
+Hannah Michalska   \\[4mm]
+\\\end{tabbing}
+\begin{center}
+\LARGE\bf{PROJECT REPORT}
+\end{center}
+\flushleft{
+{\large\bf AUTHORS:}
+\begin{tabbing}
+XXXXXXXXXXXXXXXXXXXXXXX\= XXXXXXXXXXXXXXXXXXXXXXXX\= \kill
+{\bf Banuso Abdulquadri Oluwatobi} \> {\bf Amal Koodoruth} \\
+{\bf 260669341 } \> {\bf 260831147}\\[5mm]
+\\\end{tabbing}
+{\Large\bf Personal Declaration}\\[3mm]
+{\large\it We wish to state that the work presented here has been carried out by the authors alone. No part of it has been copied from the internet or other sources, unless clearly acknowledged, and no part of it has been shared with other students.}\\[3mm]
+\flushleft{
+\begin{tabbing}
+XXXXXXXXXXXXXXXXXXXXXXX\= XXXXXXXXXXXXXXXXXXXXXXXX\= \kill
+{\bf Banuso Abdulquadri Oluwatobi } \> {\bf Amal Koodoruth} \\[7mm]
+{Abdulquadri} \> {Amal}\\
+{260669341} \> {260831147}\\
+\\\end{tabbing}
+}
+
+\clearpage
+
+\input{Files/Q1/Q1_new}
+\input{Files/Q2/Q2}
+\input{discussion}
+\newpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{ieeetr}
+\bibliography{ref}
+\nocite{*}
+\input{appendix}
+\end{document}
+
+
+
+
+
+
+
+
+
+

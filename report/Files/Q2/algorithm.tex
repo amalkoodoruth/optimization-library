@@ -1,0 +1,39 @@
+\textbf{\subsection{Algorithms To Solve Constrained Nonlinear Programming Problem}}
+\noindent There are different algorithms that can solve general nonlinear programming problems for equality constraints that include the following:
+\begin{enumerate}
+    \item Augmented Lagrangian Algorithm
+    \item Lagrange - Newton Algorithm
+    \item Penalty function algorithm
+    \item Barrier function algorithm
+\end{enumerate}
+\subsubsection{Augmented Lagrangian methods}
+The \textit{augmented Lagrangian function} is obtained by adding
+a quadratic penalty term to the Lagrangian function, which gives the following.
+\begin{equation}
+    L_A(x, \lambda, \rho) \equiv f(x) - \lambda^Tc(x) + \frac{1}{2}\rho(x)^Tc(x)
+\end{equation}
+where $\rho$ is a non negative penalty parameter. Both the quadratic penalty term
+of (12) and its gradient vanish at $x^*$. Thus, if $\lambda = \lambda^*$, $x^*$ is a stationary point (with respect to $x$) of (12). The Hessian matrix of the augmented Lagrangian function is
+\begin{equation*}
+    \nabla^2L_A(x,\lambda, \rho) = \nabla^2f(x) - \sum_{i=1}^{m} (\lambda_i - \rho c_i(x))\nabla^2c_i(x) + \rho A(x)^TA(x). 
+\end{equation*}
+Since $c(x^*)=0$, the Hessian of the penalty term at $x^*$ is simply $\rho A(x^*)^TA(x^*)$, which is a positive semi-definite matrix with strictly positive eigenvalues corresponding to the eigenvectors in the range of $A(x^*)^T$. Thus, the
+presence of the penalty term in $L_A$ has the effect of increasing the (possibly negative) eigenvalues of $\nabla^2L(x^*, \lambda^*)$ corresponding to eigenvectors in the
+range space of $A(x^*)^T$, but leaving the other eigenvalues unchanged. Using this
+property, under mild conditions there exists a finite $\bar{\rho}$ such that $x^*$ is an
+unconstrained minimizer of $L_A(x, \lambda^*, \rho)$ for all $\rho > \bar{rho}$.\\
+
+In a typical augmented Lagrangian method, $x_k$ is taken as the unconstrained
+minimizer of $L_A$ in (12), where $\lambda$ is taken as $\lambda_k$, the latest multiplier estimate. Strategies must therefore be developed for choosing both $\lambda_k$ and $\rho$.\\
+
+\noindent Assume that the sufficient conditions for optimality hold at $x^*$. Then $x^*$ is a \textit{stationary point} of the Lagrangian function $L_A(x, \lambda = f(x) - \lambda^Tc(x)$, when $\lambda = \lambda^*$. Because $x^*$ is not necessarily a minimizer of the Lagrangian function, the Lagrangian function itself is not a suitable choice for the objective function of the subproblem, even if A* were known.\\
+
+\noindent Since the \textit{reduced} Hessian of the Lagrangian function is positive definite,$x^*$ is a minimizer of the Lagrangian function within the subspace of vectors orthogonal to $A(x^*)$. The positive definiteness of the reduced Hessian of the Lagrangian function indicates that the Lagrangian function can display a negative curvature at $x^*$ only along directions in the range space of $A(x^*)^T$. This suggests that a suitable function for an unconstrained subproblem might be obtained by augmenting the Lagrangian function through the addition of a term that retains the stationary properties of $x^*$, but alters the Hessian in the range space of $A(x^*)^T$.\cite{KKT11, Haestene2, flect}
+
+\subsubsection{Penalty Function Algorithm}
+A penalty function method aims to replace a constrained optimization problem by using a series of unconstrained problems whose solutions converge to the solution of the constrained problem. The unconstrained problems are formed by adding a term, called a penalty function, to the objective function that consists of a penalty parameter multiplied by a measure of violation of the constraints.
+
+\subsubsection{Barrier-function algorithms}
+Barrier-function methods can be applied only to inequality constraints for which a strictly feasible initial point exists. Thereafter, a barrier function method generates a sequence of strictly feasible iterations. These methods have received enormous attention recently because of their close relationship with the "new" polynomial approaches to linear programming.\cite{Han111, Gill,Haestene2} \\
+\indent In many physical and engineering applications, the constraint functions not only characterize the desired properties of the solution, but also define a region in which the problem statement is meaningful (for example, $f(x)$ or some of the constraint functions may be undefined outside the feasible region). An artificial convention to extend the problem statement outside the feasible region would not lend itself to the design of a computationally reasonable algorithm and might introduce complications not present in the original problem.\cite{Boyd111}\\
+\indent Barrier-function methods require strict satisfaction of all constraints at the starting point and subsequent iterations. The continued enforcement of feasibility is the "opposite" of a penalty function method for inequalities, where the constrained solution is approached through a sequence of strictly \textit{infeasible} points with respect to the active constraints.  As in the penalty case, a barrier-function method creates a sequence of modified functions whose successive unconstrained minimizers should converge in the limit to the constrained solution. In general, the unconstrained minimizer of $f$ will be \textit{infeasible}, or $f$ may be unbounded below. In order to guarantee that successive iterates are feasible, the modified objective function includes a term to keep iterates "inside" the feasible region. If a "barrier" is created at the boundary of the feasible region by constructing a continuous function with a positive singularity, any unconstrained minimizer of the modified function must lie strictly inside the feasible region. If the weight assigned to the barrier term is decreased toward zero, the sequence of unconstrained minimizers should generate a strictly feasible approach to the constrained minimizer.\cite{Haestene2}

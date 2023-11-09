@@ -1,0 +1,114 @@
+\clearpage
+\section{Unconstrained Optimization}
+The code solving the unconstrained optimization problems can be found in the software package submitted.
+There are different search algorithms used to find the solutions to unconstrained nonlinear problems briefly explained below. 
+\input{Files/Q1/algorithm_definetion}
+\subsection{Quadratic Optimization Problem}
+The objective is to minimize the following cost function:
+\begin{align}
+& \mbox{(A)} : \ \ V(x) = 5+ \left[ \begin{array}{cccccc} 1 & 4 & 5 & 4 & 2 & 1 \end{array} \right] x + x^T \left[ \begin{array}{cccccc}  9 & 1 & 7 & 5 & 4 & 7 \\
+1 & 11 & 4 & 2 & 7 & 5 \\ 7 & 4 & 13 & 5 & 0 & 7 \\ 5 & 2 & 5 & 17 & 1  & 9 \\
+4 & 7 & 0 & 1 & 21 & 15 \\ 7 & 5 & 7 & 9 & 15 & 27 \end{array} \right] x ; \ \ x \in \mathbb{R}^6 \nonumber \\
+\end{align}
+This is an unconstrained quadratic optimization problem of the form:
+\begin{align}
+    V(x) = a + b^{T}x + \frac{1}{2}x^{T}Cx
+\end{align},
+where 
+\begin{align}
+    V \in \mathbb{R}, \hspace{2mm} a \in \mathbb{R}, \hspace{2mm} b \in \mathbb{R}^{n},\hspace{2mm} C \in \mathbb{R}^{nxn} \hspace{2mm} and \hspace{2mm} C^{T} = C  \hspace{2mm}& \hspace{2mm} C > 0
+\end{align}
+C is a positive definite symettric matrix.
+This can be solved using the standard quadractic direct solution: 
+\begin{align}
+    x = -C^{-1}b
+\end{align}
+or using search algorithms: 
+\begin{itemize}
+    \item Steepest descent algorithms 
+    \item Secant algorithms
+    \item Conjugate gradient method 
+\end{itemize}
+\subsubsection{Solutions to Quadratic problem using our python programs and matlab benchmark \textit{quadprog} function: }
+All 4 algorithms converged to the same minimal solution for $x$ with a tolerance set to be $tol =1e-8$ and the same initial value of all column vector of zeros. The gradient loss of the secant algorithm converged to a minimum fastest of our Python-implemented sub-programs as it requires one function evaluation per iteration, following the initial step and it does not require use of the derivative of the function $V(x)$,
+while the steepest descent took longest to approach a minimum as it requires to constantly calculate the gradient derivative ($\nabla V(x)$) at every iteration step which is computationally expensive as can be seen in Figure 1. The matlab program used the algorithm \textit{ interior point convex} and quickly found a solution in 1 iteration. \newline All solutions correspond to the standard quadratic solution: 
+\begin{align}
+    x = -C^{-1}*b = \begin{bmatrix}
+     0.3366 \\
+    0.0560 \\
+   -0.4300 \\
+   -0.1920 \\
+   -0.2713 \\ 
+    0.2101 \\
+    \end{bmatrix} 
+\end{align}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+ & \textbf{Steepest Descent} & \textbf{Secant} &\textbf{Conjugate Method} &\textbf{\textit{quadprog}}\\
+\hline
+Iterations & 107 & 14 &37& 1 \\
+\hline
+$x$ & 
+\begin{bmatrix}
+0.3365 \\
+ 0.0560 \\
+ -0.4300   \\
+ -0.1919  \\
+ -0.2713 \\
+ 0.2100 \\
+\end{bmatrix}
+&\begin{bmatrix}
+ 0.3365 \\
+ 0.05604  \\ 
+ -0.4300 \\
+ -0.1919 \\
+ -0.2713 \\
+ 0.2100 \\
+\end{bmatrix} & \begin{bmatrix}
+0.3365 \\
+0.05604\\
+-0.4300 \\
+-0.1919 \\
+-0.2713 \\ 
+0.2101\\
+\end{bmatrix} &\begin{bmatrix}
+     0.3366 \\
+    0.0560 \\
+   -0.4300 \\
+   -0.1920 \\
+   -0.2713 \\
+    0.2101 \\
+\end{bmatrix} \\
+\hline 
+\end{tabular}
+\label{table:results}
+\caption{Algorithm Performance}
+\end{center}
+\end{table}
+
+\begin{figure}[h!]
+\begin{subfigure}[t]{0.6\textwidth}
+\centering
+    \includegraphics[width=\textwidth]{images/python/sd-pA.eps}
+\caption{}
+\end{subfigure}
+\hfill 
+\begin{subfigure}[t]{0.6\textwidth}
+\centering
+    \includegraphics[width=\textwidth]{images/python/sec-pA.eps}
+    \caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.6\textwidth}
+\centering
+    \includegraphics[width=\textwidth]{images/python/cg-pA.eps}
+    \caption{}
+\end{subfigure}
+\caption{(a): Steepest descent, (b): Secant method, (c): Conjugate gradient}
+\end{figure}
+\clearpage
+\input{Files/Q1/Q1b}
+\clearpage
+\input{Files/Q1/Q1c}
